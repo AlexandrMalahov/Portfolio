@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{picture.name}}</title>
+</head>
+<body class="container">
+    <div class="picture">
+        <img src="{{picture.image.url}}"/><br/>
+        Название: {{picture.name}}<br/>
+        Дата добавления: {{picture.date_of_create}}
+    </div>
+    <div class="comments">
+        <h2>Комментарии:</h2>
+        {% if comments %}
+            {% for comment in comments %}
+            {{comment.comment}}
+            <a href="edit/{{comment.id}}">Изменить</a> | <a href="delete/{{comment.id}}">Удалить</a> <br/>
+            {% endfor %}
+        {% else %}
+            Нет комментариев.
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">
+                Сохранить
+            </button>
+        </form>
+    </div>
+</body>
+</html>

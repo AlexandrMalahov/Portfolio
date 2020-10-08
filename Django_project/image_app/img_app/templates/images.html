@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pictures</title>
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+</head>
+<body>
+    <div class="Pictures">
+        {% for pic in pictures %}
+        <a href="{{pic.pk}}"><img src="{{pic.image.url}}" alt={{pic.name}}/></a>
+        {% endfor %}
+    </div>
+    <div class="Add_picture">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">
+                Сохранить
+            </button>
+        </form>
+    </div>
+</body>
+</html>
